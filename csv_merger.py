@@ -1,4 +1,5 @@
 from csv import DictReader, writer
+from datetime import date
 from tempfile import TemporaryFile
 
 
@@ -31,11 +32,11 @@ def merge_csvs(csv_to_merge_list):
   with TemporaryFile() as temp_file:
     csv_writer = writer(temp_file)
     for reader in dict_reader_list:
-      csv_writer.writerows([line_dict.values() for line_dict in reader])
+      csv_writer.writerows(line_dict.values() for line_dict in reader)
 
     #import ipdb; ipdb.set_trace() 
     temp_file.seek(0)
-    perm_file = open('perm.csv', 'w')
+    perm_file = open('combined_%s.csv' % (date.today()), 'w')
     perm_file.write('%s\r\n' % (','.join(headings)))
     perm_file.writelines(line for line in temp_file)
     perm_file.close()
