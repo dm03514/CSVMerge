@@ -1,8 +1,9 @@
 from csv import DictReader, writer
 from datetime import date
+import os
 
 
-def merge_csvs(csv_to_merge_list):
+def merge_csvs(csv_to_merge_list, save_to_path=os.path.dirname( __file__ )):
   """
   Takes a list of csv filepaths to merge.  Saves a combined file in the current directory.
   """
@@ -27,7 +28,7 @@ def merge_csvs(csv_to_merge_list):
     dict_reader_list.append(reader)
 
   # create a new file
-  with open('combined_%s.csv' % (date.today()), 'w') as perm_file:
+  with open('%s/combined_%s.csv' % (save_to_path, date.today()), 'w') as perm_file:
     csv_writer = writer(perm_file)
     csv_writer.writerow(headings)
     for reader in dict_reader_list:
