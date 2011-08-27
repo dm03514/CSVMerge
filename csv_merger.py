@@ -32,7 +32,4 @@ def merge_csvs(csv_to_merge_list):
     csv_writer.writerow(headings)
     for reader in dict_reader_list:
       csv_writer.writerows(line_dict.values() for line_dict in reader)
-    #import ipdb; ipdb.set_trace() 
-
-merge_csvs(['50onred.csv', 'Firstand10.csv', 'Commission Junction.csv', 'WorkingPlanet.csv', 'test.csv', 'test1.csv', 'test2.csv', 'test3.csv'])
 
