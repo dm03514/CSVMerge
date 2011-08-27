@@ -14,15 +14,16 @@ class TestCSVMerger(unittest.TestCase):
   def test_merge_csvs_success(self):
     """Tests we can successfully merge 2 csv files"""
     # make 2 temp csv files so we have something to combine
+    files_to_open_list = []
     for i in range(2):
       headings_list = ['Heading1', 'Heading2', 'Heading3', 'Heading4']
+      files_to_open_list.append('%s/csv%s.csv' % (self.temp_dir, i))
       with open('%s/csv%s.csv' % (self.temp_dir, i), 'w') as f:
         csv_writer = writer(f)
         csv_writer.writerow(headings_list)
         csv_writer.writerow([i, i, i, i])
         csv_writer.writerow([i, i, i, i])
  
-    files_to_open_list = ['%s/csv%s.csv' % (self.temp_dir, i) for i in range(2)] 
     merge_csvs(files_to_open_list)
     # open the outputted csv file and make sure it has the right headings
     f = open('combined_%s.csv' % (date.today()), 'r')
