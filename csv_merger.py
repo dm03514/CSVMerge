@@ -32,5 +32,7 @@ def merge_csvs(csv_to_merge_list, save_to_path=os.path.dirname( __file__ )):
     csv_writer = writer(perm_file)
     csv_writer.writerow(headings)
     for reader in dict_reader_list:
-      csv_writer.writerows(line_dict.values() for line_dict in reader)
+      # Make Sure that we retain the heading order, there has to be a better way to do this.
+      for line_dict in reader:
+        csv_writer.writerow([line_dict[heading] for heading in headings])
 

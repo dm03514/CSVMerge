@@ -21,8 +21,8 @@ class TestCSVMerger(unittest.TestCase):
       with open('%s/csv%s.csv' % (self.temp_dir, i), 'w') as f:
         csv_writer = writer(f)
         csv_writer.writerow(headings_list)
-        csv_writer.writerow([i, i, i, i])
-        csv_writer.writerow([i, i, i, i])
+        csv_writer.writerow([1, 2, 3, 4])
+        csv_writer.writerow([1, 2, 3, 4])
  
     merge_csvs(files_to_open_list)
     # open the outputted csv file and make sure it has the right headings
@@ -31,6 +31,7 @@ class TestCSVMerger(unittest.TestCase):
     self.assertEqual(len(dict_reader.fieldnames), 4)
     lines_list = [line for line in dict_reader]
     self.assertEqual(len(lines_list), 4)
+    self.assertLess(lines_list[0]['Heading1'], lines_list[0]['Heading2'])
 
   def tearDown(self):
     rmtree(self.temp_dir)
