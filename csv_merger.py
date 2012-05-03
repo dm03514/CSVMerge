@@ -38,6 +38,4 @@ def merge_csvs(csv_to_merge_list, save_to_path=os.path.dirname( __file__ )):
       # the lines.  Everything should match up.
       for line in file_handler:
         perm_file.write(line)
-      #for line_dict in reader:
-      #csv_writer.writerow([line_dict[heading] for heading in headings])
 
